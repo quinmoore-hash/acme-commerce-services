@@ -1,34 +1,37 @@
 package com.acme.notifications.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity
+public class SecurityConfig {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("order-service").password("{noop}order-service").roles("PUBLISHER")
-                .and()
-                .withUser("support").password("{noop}support").roles("PUBLISHER", "SUPPORT");
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new InMemoryUserDetailsManager(
+                User.withUsername("order-service").password("{noop}order-service").roles("PUBLISHER").build(),
+                User.withUsername("support").password("{noop}support").roles("PUBLISHER", "SUPPORT").build());
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .mvcMatchers("/actuator/health", "/actuator/info").permitAll()
-                .mvcMatchers("/actuator/**").hasRole("SUPPORT")
-                .antMatchers("/api/notifications/**").hasAnyRole("PUBLISHER", "SUPPORT")
-                .anyRequest().denyAll()
-                .and()
-                .httpBasic();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+                        .requestMatchers("/actuator/**").hasRole("SUPPORT")
+                        .requestMatchers("/api/notifications/**").hasAnyRole("PUBLISHER", "SUPPORT")
+                        .anyRequest().denyAll())
+                .httpBasic(Customizer.withDefaults());
+        return http.build();
     }
 }

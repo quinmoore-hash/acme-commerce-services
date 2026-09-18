@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 
 import com.acme.orders.domain.Order;
 import com.acme.orders.domain.OrderStatus;
@@ -48,7 +48,7 @@ public class OrderController {
         return OrderResponse.from(orderService.getOrder(id));
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     public List<OrderResponse> list(@RequestParam(required = false) @Email String customerEmail,
             @RequestParam(required = false) OrderStatus status) {
         return orderService.findOrders(customerEmail, status).stream()
