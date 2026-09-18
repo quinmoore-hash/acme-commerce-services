@@ -2,7 +2,7 @@ package com.acme.common.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import java.io.IOException;
 

@@ -3,7 +3,7 @@ package com.acme.orders.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import com.acme.common.error.ResourceNotFoundException;
 import com.acme.orders.client.InventoryClient;

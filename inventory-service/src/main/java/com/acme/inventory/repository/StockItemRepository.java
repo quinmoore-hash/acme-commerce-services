@@ -3,7 +3,7 @@ package com.acme.inventory.repository;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.LockModeType;
+import jakarta.persistence.LockModeType;
 
 import com.acme.inventory.domain.StockItem;
 
