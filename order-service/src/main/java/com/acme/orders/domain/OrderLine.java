@@ -2,8 +2,8 @@ package com.acme.orders.domain;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class OrderLine {

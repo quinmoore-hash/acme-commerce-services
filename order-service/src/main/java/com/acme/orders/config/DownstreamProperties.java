@@ -2,16 +2,14 @@ package com.acme.orders.config;
 
 import java.time.Duration;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-@ConstructorBinding
 @ConfigurationProperties(prefix = "acme.downstream")
 public class DownstreamProperties {
 

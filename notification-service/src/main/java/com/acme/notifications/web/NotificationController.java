@@ -3,8 +3,8 @@ package com.acme.notifications.web;
 import java.net.URI;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import com.acme.notifications.service.Notification;
 import com.acme.notifications.service.NotificationService;

@@ -2,7 +2,7 @@ package com.acme.inventory.service;
 
 import java.math.BigDecimal;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import com.acme.inventory.domain.StockItem;
 import com.acme.inventory.repository.StockItemRepository;

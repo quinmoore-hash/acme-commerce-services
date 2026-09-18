@@ -11,10 +11,10 @@ A small multi-module Spring Boot platform made of three microservices and a shar
 
 ## Stack
 
-- Java 17
-- Spring Boot 2.7.x (Spring Framework 5.3, Spring Security 5.7, Hibernate 5.6)
-- `javax.*` APIs (persistence, validation, servlet, annotation)
-- springdoc-openapi 1.x for OpenAPI docs on `order-service`
+- Java 21
+- Spring Boot 3.5.x (Spring Framework 6, Spring Security 6, Hibernate 6)
+- `jakarta.*` APIs (persistence, validation, servlet, annotation)
+- springdoc-openapi 2.x for OpenAPI docs on `order-service`
 - Maven multi-module build with the Maven wrapper
 
 ## Build and test
